@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="WpfDemoApp.ControlTemplateControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfDemoApp"
+             xmlns:utilities="clr-namespace:WpfDemoApp.Utilities"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <utilities:ThicknessConverter x:Key="thicknessConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Button BorderBrush="LightBlue" BorderThickness="5,10,15,20"  Content="Button" HorizontalAlignment="Left" Margin="92,88,0,0" VerticalAlignment="Top" Width="212" Height="52" Click="Button_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid>
+                        <Ellipse x:Name="MyEllipse" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness,Converter={StaticResource thicknessConverter}}" Fill="{TemplateBinding Background}"/>
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="MyEllipse" Property="Fill" Value="Blue"/>
+                            <Setter TargetName="MyEllipse" Property="Stretch" Value="Uniform"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="MyEllipse" Property="Fill" Value="Orange"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button BorderBrush="LightBlue" BorderThickness="5,10,15,20" Content="Button" HorizontalAlignment="Left" Margin="92,167,0,0" VerticalAlignment="Top" Width="212" Height="58"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="106,262,0,0" VerticalAlignment="Top" Width="75"/>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,51 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfDemoApp"
+             xmlns:models="clr-namespace:WpfDemoApp.Models"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:Utilities="clr-namespace:WpfDemoApp.Utilities" xmlns:b="http://schemas.microsoft.com/xaml/behaviors" x:Class="WpfDemoApp.SimpleBindControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <!--<Utilities:AnyConverter x:Key="AnyConverter"/>-->
+        <models:SomeData Name="Jim" Val="54" x:Key="SomeData"/>
+        <ObjectDataProvider ObjectType="{x:Type models:SomeData}" x:Key="SomeData2">
+            <ObjectDataProvider.ConstructorParameters>
+                <system:String>Albert</system:String>
+                <system:Int32>23</system:Int32>
+            </ObjectDataProvider.ConstructorParameters>
+        </ObjectDataProvider>
+        <system:String x:Key="Fallback">Fallback!</system:String>
+    </UserControl.Resources>
+    <Grid x:Name="theGrid" DataContext="{StaticResource SomeData}">
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="23" Margin="73,46,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="120">
+            <b:Interaction.Behaviors>
+                <local:SelectAllBehaviour/>
+            </b:Interaction.Behaviors>
+        </TextBox>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="73,74,0,0" TextWrapping="Wrap" Text="{Binding Val}" VerticalAlignment="Top" Width="120">
+            <b:Interaction.Behaviors>
+                <local:SelectAllBehaviour/>
+            </b:Interaction.Behaviors>
+        </TextBox>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="73,142,0,0" TextWrapping="Wrap" Text="{Binding Name, Converter={Utilities:AnyConverter}}" VerticalAlignment="Top" Width="120">
+            <b:Interaction.Behaviors>
+                <local:SelectAllBehaviour/>
+            </b:Interaction.Behaviors>
+        </TextBox>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="73,170,0,0" TextWrapping="Wrap" Text="{Binding Val}" VerticalAlignment="Top" Width="120">
+            <b:Interaction.Behaviors>
+                <local:SelectAllBehaviour/>
+            </b:Interaction.Behaviors>
+        </TextBox>
+        <TextBox x:Name="textBoxName" HorizontalAlignment="Left" Height="23" Margin="73,216,0,0" TextWrapping="Wrap" Text="{Binding Name, FallbackValue={StaticResource Fallback}, TargetNullValue={x:Static models:SomeData.TargetNull}}" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBoxVal" HorizontalAlignment="Left" Height="23" Margin="73,253,0,0" TextWrapping="Wrap" Text="{Binding Val, FallbackValue={x:Static models:SomeData.Fallback}, TargetNullValue={x:Static models:SomeData.TargetNull}}" VerticalAlignment="Top" Width="120"/>
+
+
+
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="370,216,0,0" TextWrapping="Wrap" Text="{x:Static models:SomeData.Fallback}" VerticalAlignment="Top" Width="120"/>
+    </Grid>
+</UserControl>

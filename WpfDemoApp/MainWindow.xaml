@@ -1,0 +1,71 @@
+﻿<UserControl
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfDemoApp"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors" x:Class="WpfDemoApp.MainWindow"
+        mc:Ignorable="d"
+        d:DesignHeight="250" d:DesignWidth="400">
+    <UserControl.Resources>
+        <Storyboard x:Key="Storyboard1">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="button">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="197.6"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="1.6"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="1.6"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="button">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="160"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="-2.4"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:3" Value="-2.4"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+        </EventTrigger>
+    </UserControl.Triggers>
+    <Grid ButtonBase.Click="Grid_Click">
+        <Grid.Resources>
+            <LinearGradientBrush x:Key="PinkYellow" EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFFD9C9C" Offset="0"/>
+                <GradientStop Color="#FFFFF695" Offset="0.5"/>
+                <GradientStop Color="#FF7193FC" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Resources>
+        <Button x:Name="button" Content="Button" Background="{StaticResource PinkYellow}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="177" Click="Button_Click" Height="41" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <b:Interaction.Triggers>
+                <b:EventTrigger EventName="MouseEnter">
+                    <b:ControlStoryboardAction Storyboard="{StaticResource Storyboard1}">
+                        <b:Interaction.Triggers>
+                            <b:EventTrigger EventName="Loaded">
+                                <b:ControlStoryboardAction/>
+                            </b:EventTrigger>
+                        </b:Interaction.Triggers>
+                    </b:ControlStoryboardAction>
+                </b:EventTrigger>
+            </b:Interaction.Triggers>
+        </Button>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,56,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="135,57,0,0" TextWrapping="Wrap" Text="The quick brown fox jumps over the lazy dog!" VerticalAlignment="Top"/>
+        <Button HorizontalAlignment="Left" Margin="10,84,0,0" VerticalAlignment="Top" Width="201" Height="43" Click="Button_Click_2">
+            <Button Content="Button" Width="75" Click="Button_Click_1"/>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="300,137,0,0" VerticalAlignment="Top" Width="75">Yet another button!</Button>
+        <Button HorizontalAlignment="Left" Margin="300,165,0,0" VerticalAlignment="Top" Width="75" Content="Press Me!"/>
+        <Button Content="Another Button" HorizontalAlignment="Left" Margin="300,189,0,0" VerticalAlignment="Top" Width="75"/>
+        <local:InfoControl HorizontalAlignment="Left" Height="57" Margin="22,153,0,0" VerticalAlignment="Top" Width="241"/>
+
+    </Grid>
+</UserControl>

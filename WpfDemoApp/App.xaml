@@ -1,0 +1,43 @@
+﻿<Application x:Class="WpfDemoApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:utilities="clr-namespace:WpfDemoApp.Utilities"
+             xmlns:local="clr-namespace:WpfDemoApp"
+             StartupUri="StartWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/MyResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <LinearGradientBrush x:Key="BandyBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFFC897C" Offset="0"/>
+                <GradientStop Color="#FFF672A6" Offset="1"/>
+                <GradientStop Color="#FFA9AAF1" Offset="0.248"/>
+                <GradientStop Color="#FFFDEDA0" Offset="0.665"/>
+            </LinearGradientBrush>
+            <utilities:ThicknessConverter x:Key="thicknessConverter"/>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="{StaticResource BandyBrush}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <Ellipse x:Name="MyEllipse" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BorderThickness,Converter={StaticResource thicknessConverter}}" Fill="{TemplateBinding Background}"/>
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="MyEllipse" Property="Fill" Value="Yellow"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="MyEllipse" Property="Fill" Value="Red"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+     </Application.Resources>
+</Application>

@@ -1,0 +1,27 @@
+﻿<Application x:Class="FlightWpf.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:FlightWpf"
+             xmlns:models="clr-namespace:FlightWpf.Models"
+             >
+    <Application.Resources>
+        <ResourceDictionary>
+            <DataTemplate DataType="{x:Type models:PassengerDetails}">
+                <Border BorderBrush="Blue" BorderThickness="1">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" Margin="3,2"/>
+                        <TextBlock Text="{Binding Weight}" Margin="3,2"/>
+                    </StackPanel>
+                </Border>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type models:SilverPassengerDetails}">
+                <Border BorderBrush="Silver" BorderThickness="1">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" Margin="3,2"/>
+                        <TextBlock Text="{Binding Weight}" Margin="3,2"/>
+                    </StackPanel>
+                </Border>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
